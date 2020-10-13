@@ -12,8 +12,8 @@ A simple maze Game written in Java
 
 3. 프로젝트 내용
     1) Set up
-        * JDK Version : 
-	* OS : 
+        * JDK Version : 14
+	    * OS : Mac, Windows 7
     2) 구현 내용
         a. Maze
         b. Item
@@ -32,7 +32,7 @@ A simple maze Game written in Java
     1. 전체적인 구조 설계
     2. Git 다루기
     3. 버전 맞추기
-    4.
+    4. 
 
 
 
