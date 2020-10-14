@@ -16,7 +16,6 @@ A simple maze Game written in Java
 2. 구현 내용
     1. Maze
         * 총 1개로 사용.
-        * Singleton Pattern 사용(Lazy Instantiation)
         * 게임이 시작하면 랜덤하게 생성
         * 난이도에 따라 미로 변경(맵 크기 늘리기)
             * 맵 한 칸당 Array[3][3]로 설정    
@@ -24,18 +23,18 @@ A simple maze Game written in Java
             * Intermediate : 10*10
             * Expert : 15*15
         * Timer 동작
-    2. Item
+    2. Item(추가 사항)
         * Factory Method Pattern 사용
         * 위치는 램덤하게 아이템 생성
         * 시간을 늘리는/줄이는 아이템
-        * 속도가 빨라지는/느려지는거 아이템
         * 시야가 일정시간 동안 사라지는 아이템
         * 벽을 부수는 아이템
+        * 방향키 일정시간 랜덤하게 변환
     3. User
-        * Maze - User, Observer Pattern 사용
+        * MazeGame - User, Observer Pattern 사용
         * 방향키로 움직임 설정
-        * 속도 결정
     4. Rank System
+        * Singleton Pattern 사용(Lazy Instantiation)
         * 0점 이면 랭킹에 등록되지 않는다.
         * 1등부터 10등까지 등록
         * 기본 랭크 파일 만들기(파일 입출력)
@@ -55,10 +54,22 @@ A simple maze Game written in Java
     5) 일정 시간 안에 탈출 & 시간이 오버되면 0점으로 종료
     6) 랭킹 등록
 
-
 ## 5. 소프트웨어 구조 설계
 * UML
 
 
-
-
+## 6. 세부 사항
+1. Branch 명
+    * Maze : dev-maze
+    * Item : dev-item
+    * User : dev-user
+    * Rank System : dev-rank
+    * 추가 사항은 나중에 추가 예정
+    
+2. Class
+    1. MazeGame : 
+    2. Board
+        * WALL = {'─', '│', '┌', '┐', '┘', '└', '├', '┬', '┤', '┴', '┼'}
+    3. Player
+    4. Item
+    5. RankSystem : 
