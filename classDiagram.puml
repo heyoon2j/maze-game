@@ -16,6 +16,10 @@ interface Usable {
     + {abstract} void use()
 }
 
+interface Command {
+    + {abstract} void execute()
+}
+
 class Position {
     + int x
     + int y
@@ -24,11 +28,14 @@ class Position {
 class MazeGame implements Initializable, Playable {
     + Board board
     + Player player
+    + List<Command> command
 
     + void initialize()
-    + void update()
+    + void push(Command command)
+    + void action()
+    + void pop()
 
-    + void play()
+    + void play()       // command를 실행
 }
 
 class Player implements Playable, Runnable {
@@ -61,6 +68,8 @@ class Board implements Initializable, Printable {
     + boolean isFinished(Player curPlayer)
     + void addItem()
     + void removeItem()
+
+    + void notifyObserver() // update() 아니라, mazeGame의 Command List에 추가
 }
 
 class ItemFactoryProducer {
