@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player implements Playable, Runnable {
@@ -6,6 +7,11 @@ public class Player implements Playable, Runnable {
     private List<Item> itemList;
     Position pos;
     MazeGame mazeGame;
+
+    Player(String name) {
+        this.name = name;
+        itemList = new ArrayList<>();
+    }
 
     @Override
     public void play() {
@@ -21,12 +27,13 @@ public class Player implements Playable, Runnable {
 
     }
 
-    public void addItem() {
+    //@todo addItem, removeItem with List
+    public void addItem(Item item) {
 
 
     }
 
-    public void removeItem() {
+    public void removeItem(Item item) {
 
     }
 
