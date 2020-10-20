@@ -1,3 +1,3 @@
 public interface Usable {
-    public abstract void use();
+    public abstract void use(Player player);
 }

@@ -1,3 +1,3 @@
 public abstract class ItemFactory {
-    public abstract Item getItem();
+    public abstract Item getItem(String itemName);
 }

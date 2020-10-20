@@ -7,6 +7,31 @@ public class Position {
         this.y = y;
     }
 
+    @Override
+    public int hashCode() {
+//        return super.hashCode();
+        return x*1000 + y;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+
+        Position pos;
+        if (obj instanceof Position) {
+            pos = (Position)obj;
+        } else {
+            return false;
+        }
+
+        if (pos.x != this.x || pos.y != this.y) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public int getX() {
         return x;
     }

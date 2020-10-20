@@ -1,14 +1,15 @@
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.IOException;
+
 
 public class RankSystem implements Printable {
-    File rankFile;
+    private File rankFile;
 
     private RankSystem () {}
 
-    public RankSystem getRankSystem() {
+    public static RankSystem getRankSystem() {
         return LazyHolder.INSTANCE;
     }
 
@@ -48,6 +49,7 @@ public class RankSystem implements Printable {
                     int rank = Integer.parseInt(parse[1]);
 
                     String compareTime = parse[2];
+
                     if(time.compareTo(compareTime) <= 0) {
                         return rank;
                     }
@@ -62,5 +64,9 @@ public class RankSystem implements Printable {
 
     public void writeFile(String name, String time, int rank) {
 
+    }
+
+    public void setRankFile(File rankFile) {
+        this.rankFile = rankFile;
     }
 }
