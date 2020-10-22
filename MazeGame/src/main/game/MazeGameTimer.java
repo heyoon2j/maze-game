@@ -21,7 +21,8 @@ public class MazeGameTimer {
     }
 
     public void start(int time) {
-        itemGeneratorTimer.schedule(new TimerTask() { @Override
+        itemGeneratorTimer.schedule(new TimerTask() {
+            @Override
             public void run() {
                 mazeGame.push(new Command() {
                     @Override
@@ -31,7 +32,7 @@ public class MazeGameTimer {
                     }
                 });
             }
-        }, itemGeneratorCycle,itemGeneratorCycle);
+        }, itemGeneratorCycle, itemGeneratorCycle);
         // 1000*30 : 30 second
 
 
@@ -40,7 +41,7 @@ public class MazeGameTimer {
             public void run() {
                 MazeGameClient.SIGNAL[3] = true;
             }
-        },FINISH_TIME);
+        }, FINISH_TIME);
         // 1000*60*1 : 1 minute
 
         startTime = System.currentTimeMillis();

@@ -17,10 +17,8 @@ public class MazeGameClient implements Runnable {
 
     @Override
     public void run() {
-        synchronized (System.in) {
-            this.mazeGame.getBoard().print();
-            this.mazeGame.getPlayer().play();
-        }
+        this.mazeGame.getBoard().print();
+        this.mazeGame.getPlayer().play();
 
         while (true) {
             synchronized (SIGNAL) {
