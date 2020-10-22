@@ -46,9 +46,7 @@ public class Main {
         System.out.println("* Player Count : 1");
         System.out.print("* Player Name(Length 3) : ");
         String name = scanner.nextLine();
-        Player player1 = new Player(name.substring(0,3));
-
-        System.out.println(player1.getName());
+        Player player1 = new Player(name.substring(0,3).toUpperCase());
 
         // Select Level
         System.out.println("");
@@ -90,7 +88,6 @@ public class Main {
         // Maze Game Over
         String playTime = (player1.getTimeRecord()/1000) + ":" + ((player1.getTimeRecord()/10) % 100);
         System.out.println("Player Name : "+player1.getName() + "/ " + "Record : " + playTime);
-        //////////////////////////////////////////////////
 
         // RankSystem Start
         RankSystem rankSystem = RankSystem.getRankSystem();
@@ -98,7 +95,7 @@ public class Main {
 
         if (player1.getTimeRecord() < MazeGameTimer.FINISH_TIME) {
             int rank = 0;
-            if ((rank = rankSystem.readFile(playTime)) < 11) {
+            if ((rank = rankSystem.readFile(player1.getTimeRecord())) < 11) {
                 rankSystem.writeFile(player1.getName(), playTime, rank);
             }
         }

@@ -34,7 +34,7 @@ public class RankSystem implements Printable {
         }
     }
 
-    public int readFile(String time) {
+    public int readFile(long time) {
         try (FileInputStream fis = new FileInputStream(this.rankFile);
              InputStreamReader isr = new InputStreamReader(fis)) {
 
@@ -57,8 +57,11 @@ public class RankSystem implements Printable {
                     if(parse[1].equals("등수")) {
                         continue;
                     }
+                    // 30:11
+                    // 30110
+                    long comparedTime = Long.parseLong(parse[2].replace(":","")) * 10;
 
-                    if(time.compareTo(parse[2]) < 0) {
+                    if(time < comparedTime) {
                         return Integer.parseInt(parse[1]);
                     }
                 }

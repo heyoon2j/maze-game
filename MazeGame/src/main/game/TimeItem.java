@@ -11,7 +11,6 @@ public class TimeItem extends Item {
     public void use(Player player) {
         long time = player.getTimeRecord() + this.addedTime;
         System.out.println("아이템이 사용 되었습니다. 추가 시간 " + (this.addedTime/1000) + "초 적용");
-        System.out.println(player.getTimeRecord());
         player.setTimeRecord(time);
     }
 }
