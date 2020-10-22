@@ -1,0 +1,124 @@
+@startuml
+
+interface Playable {
+    + {abstract} void play()
+}
+
+interface Printable {
+    + {abstract} void print()
+}
+
+interface Initializable {
+    + {abstract} void initialize()
+}
+
+interface Usable {
+    + {abstract} void use()
+}
+
+interface Command {
+    + {abstract} void execute()
+}
+
+class Position {
+    + int x
+    + int y
+}
+
+class MazeGame implements Initializable, Playable {
+    + Board board
+    + Player player
+    + List<Command> command
+
+    + void initialize()
+    + void push(Command command)
+    + void action()
+    + void pop()
+
+    + void play()       // command를 실행
+}
+
+class Player implements Playable, Runnable {
+    + String name
+    + String timeRecord
+    + List<Item> itemList
+    + Position pos
+    + MazeGame mazeGame
+
+    + void play()
+    + void run()
+    + void notifyObserver()
+    + void addItem()
+    + void removeItem()
+}
+
+class Board implements Initializable, Printable {
+    {static} final char[] PLAYER_MARK
+    {static} final char[] WALL
+    final char[][] board
+
+    + List<Item> itemList
+    + Timer timer
+
+    + Board(int size)
+    + void initialize()
+    + void print()
+    + void setPlayerPosition(Player curPlayer, char PLAYER_MARK)
+    + boolean isPossible(Position pos)
+    + boolean isFinished(Player curPlayer)
+    + void addItem()
+    + void removeItem()
+
+    + void notifyObserver() // update() 아니라, mazeGame의 Command List에 추가
+}
+
+class ItemFactoryProducer {
+    + static ItemFactory getFactory(Item item)
+}
+
+abstract class ItemFactory {
+    + abstract Item getItem()
+}
+
+class TimeItemFactory extends ItemFactory {
+    + Item getItem()
+}
+
+class SightItemFactory extends ItemFactory {
+    + Item getItem()
+}
+
+class CrushItemFactory extends ItemFactory {
+    + Item getItem()
+}
+
+abstract class Item implements Usable {
+    + {abstract} void use()
+}
+
+class TimeItem extends Item {
+    enum Item
+    + void use()
+}
+
+class CrushItem extends Item {
+    enum Item
+    + void use()
+}
+
+class SightTime extends Item {
+    enum Item
+    + void use()
+}
+
+class RankSystem implements Printable {
+    - {static} RankSystem rankSystem
+    - File rankFile
+    - RankSystem()
+    + {static} RankSystem getRankSystem(File rankFile)
+    + void print()
+    + int readFile(String name, String time)
+    + void writeFile(String name, String time, int rank)
+}
+
+@enduml

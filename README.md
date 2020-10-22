@@ -23,7 +23,7 @@ A simple maze Game written in Java
             * Intermediate : 10*10
             * Expert : 15*15
         * Timer 동작
-    2. Item
+    2. Item(추가 사항)
         * Factory Method Pattern 사용
         * 위치는 램덤하게 아이템 생성
         * Item 종류 
@@ -46,9 +46,7 @@ A simple maze Game written in Java
     5) 일정 시간 안에 탈출 & 시간이 오버되면 강제 종료
     6) 랭킹 등록
 
-
 ## 5. 소프트웨어 구조 설계
 * Class DIagram
 
 ![Class Diagram](Diagram/classDiagram.png)
-
