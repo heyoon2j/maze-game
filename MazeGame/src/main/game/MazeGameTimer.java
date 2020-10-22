@@ -6,12 +6,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MazeGameTimer {
+    public static final long FINISH_TIME = 180000;
+    final long itemGeneratorCycle = 20000;
+
     private MazeGame mazeGame;
     private Timer itemGeneratorTimer;
     private Timer finishTimer;
     private long startTime;
-    public static final long FINISH_TIME = 180000;
-    final long itemGeneratorCycle = 20000;
 
     MazeGameTimer(MazeGame mazeGame) {
         this.mazeGame = mazeGame;
