@@ -1,0 +1,185 @@
+@startuml
+package "main" <<Folder>> {
+    interface Command
+    interface Initializable
+
+    interface Playable
+    interface Printable
+    interface Usable
+
+    package "game" <<Folder>> {
+        class Board
+        abstract class Item
+        abstract class ItemFactory
+        class MazeGame
+        class MazeGameClient
+        class MazeGameTimer
+        class Player
+        class Position
+        class TimeItem
+        class TimeItemFactory
+        class TimeMinusItem
+        class TimePlusItem
+    }
+
+    package "rank" <<Folder>> {
+        class RankSystem
+    }
+}
+
+
+interface Playable {
+    + {abstract} void play()
+}
+
+interface Printable {
+    + {abstract} void print()
+}
+
+interface Initializable {
+    + {abstract} void initialize()
+}
+
+interface Usable {
+    + {abstract} void use(Player play)
+}
+
+interface Command {
+    + {abstract} void execute()
+}
+
+class Board implements Initializable, Printable {
+    # {static} final char GOAL
+    # {static} final int[][] MOVE
+    # {static} final char[] PLAYER_MARK
+    # {static} final char[] BLOCK
+
+    - final char[][] board
+    - List<Item> itemMap
+    - MazeGame mazeGame
+    - Position goal
+    - List<Node> blankList
+    - boolean[][] visitedPos
+
+    + Board(int size)
+    - boolean randomGenerator(List<Node> list, int x, int y)
+    - boolean isOutOfIndex(int x, int y)
+    - void surroundBlock(int x, int y)
+    - void makePass(List<Node> list)
+    + void initialize()
+    + void print()
+    + void setPlayerPosition(Player curPlayer, int moveNum)
+    + boolean isPossible(int x, int y)
+    + boolean isFinished(Player curPlayer)
+    + void addItem()
+    + void removeItem()
+}
+
+abstract class Item implements Usable {
+    + {abstract} void use()
+}
+
+abstract class ItemFactory {
+    + abstract Item getItem()
+}
+
+class MazeGame implements Initializable {
+    + enum Level
+    - List<Command> command
+    - boolean stop
+    - Level level
+    - Board board
+    - Player player
+    - MazeGameClient client;
+    - MazeGameTimer timer;
+
+    + MazeGame(Level level, main.game.Player player)
+    + void initialize()
+    + void start()
+    + void push(Command command)
+    + void action()
+    + void pop()
+}
+
+class MazeGameClient implements Runnable {
+    # {static} final boolean[] SIGNAL
+    - MazeGame mazeGame
+
+    + MazeGameClient(MazeGame mazeGame)
+    + run()
+}
+
+class MazeGameTimer {
+    {static} final long FINISH_TIME
+    - MazeGame mazeGame
+    - Timer itemGeneratorTimer
+    - Timer finishTimer
+    - long startTime
+
+    # MazeGameTimer(MazeGame mazeGame)
+    + void start(int time)
+    + void stop()
+    + long getStartTime()
+}
+
+
+class Player implements Playable {
+    {static} final char[] MOVE_ACTION
+    - String name
+    - String timeRecord
+    - List<Item> itemList
+    - Position prevPos
+    - Position pos
+    - MazeGame mazeGame
+
+    + Player()
+    + void setTimeRecord(long timeRecord)
+    + void play()
+    + void addItem()
+    + void removeItem()
+}
+
+class Position {
+    + int x
+    + int y
+}
+
+class TimeItem extends Item {
+    int addedTime
+
+    + TimeItem(int addedTime)
+    + void use(Player play)
+}
+
+class TimeItemFactory extends ItemFactory {
+    + Item getItem(String itemName)
+
+}
+
+class TimeMinusItem extends TimeItem {
+    + TimeMinusItem()
+}
+
+class TimePlusItem extends TimeItem {
+    + TimePlusItem()
+}
+
+class RankSystem implements Printable {
+    - File rankFile
+
+    - RankSystem()
+    + {static} RankSystem getRankSystem()
+    + void print()
+    + int readFile(long time)
+    + void writeFile(String name, String time, int rank)
+    + void setRankFile(File rankFile)
+}
+
+Player -- MazeGame
+Board -- MazeGame
+MazeGameTimer -- MazeGame
+MazeGameClient -- MazeGame
+Player o-- Position
+
+
+@enduml
